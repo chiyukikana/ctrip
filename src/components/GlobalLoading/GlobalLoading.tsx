@@ -7,7 +7,11 @@ interface PropsType extends PropsWithChildren {
   size?: SpinSize
 }
 
-export const Loading: React.FC<PropsType> = ({ loading, size, children }) => {
+export const GlobalLoading: React.FC<PropsType> = ({
+  loading,
+  size,
+  children,
+}) => {
   return (
     <>
       {loading ? (

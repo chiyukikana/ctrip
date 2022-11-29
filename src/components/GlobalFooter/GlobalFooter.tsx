@@ -3,7 +3,7 @@ import { Layout, Typography } from 'antd'
 
 const { Footer: AntdFooter } = Layout
 
-export const Footer: React.FC = () => {
+export const GlobalFooter: React.FC = () => {
   return (
     <AntdFooter style={{ textAlign: 'center' }}>
       <Typography.Text>Copyright Copyright Copyright</Typography.Text>

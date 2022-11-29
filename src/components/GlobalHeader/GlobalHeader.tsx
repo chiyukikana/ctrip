@@ -2,12 +2,12 @@ import { GithubOutlined } from '@ant-design/icons'
 import { Layout, Button, Row, Col, Input, Space } from 'antd'
 import React from 'react'
 
-const { Header: AntdHeader } = Layout
+const { Header } = Layout
 const { Search } = Input
 
-export const Header: React.FC = () => {
+export const GlobalHeader: React.FC = () => {
   return (
-    <AntdHeader
+    <Header
       style={{
         backgroundColor: '#fff',
         boxShadow:
@@ -60,6 +60,6 @@ export const Header: React.FC = () => {
           </Space>
         </Col>
       </Row>
-    </AntdHeader>
+    </Header>
   )
 }

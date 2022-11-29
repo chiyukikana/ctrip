@@ -1,3 +1,3 @@
-export * from './header'
-export * from './footer'
-export * from './loading'
+export * from './GlobalHeader'
+export * from './GlobalFooter'
+export * from './GlobalLoading'

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Footer, Header, Loading } from '../../components'
+import { GlobalFooter, GlobalHeader, GlobalLoading } from '../../components'
 import { Layout, Card, Row, Col, Typography, Input, DatePicker } from 'antd'
 import { getRecommendProducts } from '../../redux/recommendProducts/slice'
 import { useSelector } from '../../hooks/useSelector'
@@ -24,7 +24,7 @@ export const Home: React.FC = () => {
         backgroundColor: '#fff',
       }}
     >
-      <Header />
+      <GlobalHeader />
       <Content
         style={{
           padding: '0 50px',
@@ -34,7 +34,7 @@ export const Home: React.FC = () => {
       >
         <Row gutter={[16, 16]}>
           <Col span={12}>
-            <Loading loading={loading}>
+            <GlobalLoading loading={loading}>
               <Row gutter={[0, 16]}>
                 {recommendProducts.map(r => {
                   return (
@@ -74,7 +74,7 @@ export const Home: React.FC = () => {
                   )
                 })}
               </Row>
-            </Loading>
+            </GlobalLoading>
           </Col>
           <Col span={12}>
             <Card>
@@ -90,7 +90,7 @@ export const Home: React.FC = () => {
           </Col>
         </Row>
       </Content>
-      <Footer />
+      <GlobalFooter />
     </Layout>
   )
 }
