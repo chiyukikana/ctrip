@@ -1,6 +1,15 @@
 import React, { useEffect } from 'react'
-import { GlobalFooter, GlobalHeader, GlobalLoading } from '../../components'
-import { Layout, Card, Row, Col, Typography, Input, DatePicker } from 'antd'
+import { GlobalFooter, GlobalHeader } from '../../components'
+import {
+  Layout,
+  Card,
+  Row,
+  Col,
+  Typography,
+  Input,
+  DatePicker,
+  Spin,
+} from 'antd'
 import { getRecommendProducts } from '../../redux/recommendProducts/slice'
 import { useSelector, useDispatch } from '../../hooks'
 
@@ -33,7 +42,17 @@ export const Home: React.FC = () => {
       >
         <Row gutter={[16, 16]}>
           <Col span={12}>
-            <GlobalLoading loading={loading}>
+            {loading ? (
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <Spin />
+              </div>
+            ) : (
               <Row gutter={[0, 16]}>
                 {recommendProducts.map(r => {
                   return (
@@ -73,7 +92,7 @@ export const Home: React.FC = () => {
                   )
                 })}
               </Row>
-            </GlobalLoading>
+            )}
           </Col>
           <Col span={12}>
             <Card>
