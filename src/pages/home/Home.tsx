@@ -2,8 +2,7 @@ import React, { useEffect } from 'react'
 import { GlobalFooter, GlobalHeader, GlobalLoading } from '../../components'
 import { Layout, Card, Row, Col, Typography, Input, DatePicker } from 'antd'
 import { getRecommendProducts } from '../../redux/recommendProducts/slice'
-import { useSelector } from '../../hooks/useSelector'
-import { useDispatch } from '../../hooks/useDispatch'
+import { useSelector, useDispatch } from '../../hooks'
 
 const { Content } = Layout
 
