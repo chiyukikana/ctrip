@@ -1,41 +1,41 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from '../../lib/axios'
 
-interface RecommendProductsState {
+interface productCollectionsState {
   loading: boolean
   data: any[]
   error: string | null
 }
 
-const initialState: RecommendProductsState = {
+const initialState: productCollectionsState = {
   loading: true,
   data: [],
   error: null,
 }
 
-// 获取推荐产品
-export const getRecommendProducts = createAsyncThunk(
-  'recommendProducts/getRecommendProducts',
+// 获取推荐产品分类
+export const getProductCollections = createAsyncThunk(
+  'productCollections/getproductCollections',
   async () => {
     const { data } = await axios.get('/productCollections')
     return data
   }
 )
 
-export const recommendProductsSlice = createSlice({
-  name: 'recommendProducts',
+export const productCollectionsSlice = createSlice({
+  name: 'productCollections',
   initialState,
   reducers: {},
   extraReducers: {
-    [getRecommendProducts.pending.type]: state => {
+    [getProductCollections.pending.type]: state => {
       state.loading = true
       state.error = null
     },
-    [getRecommendProducts.fulfilled.type]: (state, action) => {
+    [getProductCollections.fulfilled.type]: (state, action) => {
       state.loading = false
       state.data = action.payload
     },
-    [getRecommendProducts.rejected.type]: (state, action) => {
+    [getProductCollections.rejected.type]: (state, action) => {
       state.loading = false
       state.data = []
       state.error = action.error.message

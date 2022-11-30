@@ -1,10 +1,10 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import { recommendProductsSlice } from './recommendProducts/slice'
+import { productCollectionsSlice } from './productCollections/slice'
 import { actionLog } from './middlewares/actionLog'
 
 const reducer = combineReducers({
-  // 推荐产品
-  recommendProducts: recommendProductsSlice.reducer,
+  // 推荐产品分类
+  productCollections: productCollectionsSlice.reducer,
 })
 const store = configureStore({
   reducer,

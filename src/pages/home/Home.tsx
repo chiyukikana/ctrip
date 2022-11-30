@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react'
 import { GlobalFooter, GlobalHeader, DataSpin } from '../../components'
-import { Layout, Card, Row, Col, Typography, Carousel, message } from 'antd'
-import { getRecommendProducts } from '../../redux/recommendProducts/slice'
+import { Layout, Row, Col, Carousel, message, Card, Typography } from 'antd'
+import { getProductCollections } from '../../redux/productCollections/slice'
 import { useSelector, useDispatch } from '../../hooks'
 
 export const Home: React.FC = () => {
-  const loading = useSelector(s => s.recommendProducts.loading)
-  const recommendProducts = useSelector(s => s.recommendProducts.data)
-  const error = useSelector(s => s.recommendProducts.error)
+  const loading = useSelector(s => s.productCollections.loading)
+  const productCollections = useSelector(s => s.productCollections.data)
+  const error = useSelector(s => s.productCollections.error)
   const dispatch = useDispatch()
   const [messageApi, contextHolder] = message.useMessage()
   useEffect(() => {
-    dispatch(getRecommendProducts())
+    dispatch(getProductCollections())
   }, [])
   useEffect(() => {
     error && messageApi.error(error)
@@ -35,14 +35,17 @@ export const Home: React.FC = () => {
           <Row gutter={[16, 16]}>
             <Col span={12}>
               <DataSpin loading={loading}>
-                <Row gutter={[0, 16]}>
-                  {recommendProducts.map(r => {
+                <Row gutter={[0, 64]}>
+                  {productCollections.map(r => {
                     return (
                       <Col span={24} key={r.id}>
-                        <Card>
-                          <Typography.Title level={3}>
-                            {r.title}
-                          </Typography.Title>
+                        <Card
+                          title={
+                            <Typography.Title level={3} style={{ margin: 0 }}>
+                              {r.title}
+                            </Typography.Title>
+                          }
+                        >
                           <Row gutter={[16, 16]}>
                             {r.touristRoutes.slice(0, 8).map((t, index) => {
                               return (

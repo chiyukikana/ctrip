@@ -13,21 +13,19 @@ export const DataSpin: React.FC<PropsType> = ({
   style,
   size,
   children,
-}) => (
-  <>
-    {loading ? (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          ...style,
-        }}
-      >
-        <Spin size={size} />
-      </div>
-    ) : (
-      children
-    )}
-  </>
-)
+}) => {
+  return loading ? (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        ...style,
+      }}
+    >
+      <Spin size={size} />
+    </div>
+  ) : (
+    <>{children}</>
+  )
+}
