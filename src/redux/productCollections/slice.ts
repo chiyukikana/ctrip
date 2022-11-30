@@ -13,7 +13,7 @@ const initialState: productCollectionsState = {
   error: null,
 }
 
-// 获取推荐产品分类
+// 获取产品分类
 export const getProductCollections = createAsyncThunk(
   'productCollections/getProductCollections',
   async () => {

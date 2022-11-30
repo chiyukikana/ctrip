@@ -3,7 +3,7 @@ import { productCollectionsSlice } from './productCollections/slice'
 import { actionLog } from './middlewares/actionLog'
 
 const reducer = combineReducers({
-  // 推荐产品分类
+  // 产品分类
   productCollections: productCollectionsSlice.reducer,
 })
 const store = configureStore({

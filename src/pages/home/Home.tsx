@@ -5,14 +5,19 @@ import { getProductCollections } from '../../redux/productCollections/slice'
 import { useSelector, useDispatch } from '../../hooks'
 
 export const Home: React.FC = () => {
+  // 产品分类获取状态
   const loading = useSelector(s => s.productCollections.loading)
+  // 产品分类数据
   const productCollections = useSelector(s => s.productCollections.data)
+  // 获取数据时的错误信息
   const error = useSelector(s => s.productCollections.error)
   const dispatch = useDispatch()
   const [messageApi, contextHolder] = message.useMessage()
+  // 尝试获取产品分类
   useEffect(() => {
     dispatch(getProductCollections())
   }, [])
+  // 产品分类获取失败
   useEffect(() => {
     error && messageApi.error(error)
   }, [error])
