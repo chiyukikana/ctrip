@@ -1,114 +1,92 @@
 import React, { useEffect } from 'react'
-import { GlobalFooter, GlobalHeader } from '../../components'
-import {
-  Layout,
-  Card,
-  Row,
-  Col,
-  Typography,
-  Input,
-  DatePicker,
-  Spin,
-} from 'antd'
+import { GlobalFooter, GlobalHeader, DataSpin } from '../../components'
+import { Layout, Card, Row, Col, Typography, Carousel, message } from 'antd'
 import { getRecommendProducts } from '../../redux/recommendProducts/slice'
 import { useSelector, useDispatch } from '../../hooks'
-
-const { Content } = Layout
 
 export const Home: React.FC = () => {
   const loading = useSelector(s => s.recommendProducts.loading)
   const recommendProducts = useSelector(s => s.recommendProducts.data)
   const error = useSelector(s => s.recommendProducts.error)
   const dispatch = useDispatch()
+  const [messageApi, contextHolder] = message.useMessage()
   useEffect(() => {
     dispatch(getRecommendProducts())
   }, [])
-  if (error) {
-    return <div>网站出错: {error}</div>
-  }
+  useEffect(() => {
+    error && messageApi.error(error)
+  }, [error])
   return (
-    <Layout
-      style={{
-        backgroundColor: '#fff',
-      }}
-    >
-      <GlobalHeader />
-      <Content
+    <>
+      {contextHolder}
+      <Layout
         style={{
-          padding: '0 50px',
-          margin: '16px 0',
-          minHeight: 1024,
+          backgroundColor: '#fff',
         }}
       >
-        <Row gutter={[16, 16]}>
-          <Col span={12}>
-            {loading ? (
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <Spin />
-              </div>
-            ) : (
-              <Row gutter={[0, 16]}>
-                {recommendProducts.map(r => {
-                  return (
-                    <Col span={24} key={r.id}>
-                      <Card>
-                        <Typography.Title level={3}>{r.title}</Typography.Title>
-                        <Row gutter={[16, 16]}>
-                          {r.touristRoutes.slice(0, 8).map((t, index) => {
-                            return (
-                              <Col span={12} key={index}>
-                                <Card
-                                  type="inner"
-                                  size="small"
-                                  cover={
-                                    <img
-                                      draggable={false}
-                                      height={200}
-                                      src={t.touristRoutePictures[1].url}
-                                      alt=""
+        <GlobalHeader />
+        <Layout.Content
+          style={{
+            padding: '0 50px',
+            margin: '16px 0',
+            minHeight: 1024,
+          }}
+        >
+          <Row gutter={[16, 16]}>
+            <Col span={12}>
+              <DataSpin loading={loading}>
+                <Row gutter={[0, 16]}>
+                  {recommendProducts.map(r => {
+                    return (
+                      <Col span={24} key={r.id}>
+                        <Card>
+                          <Typography.Title level={3}>
+                            {r.title}
+                          </Typography.Title>
+                          <Row gutter={[16, 16]}>
+                            {r.touristRoutes.slice(0, 8).map((t, index) => {
+                              return (
+                                <Col span={12} key={index}>
+                                  <Card
+                                    type="inner"
+                                    size="small"
+                                    cover={
+                                      <img
+                                        draggable={false}
+                                        height={200}
+                                        src={t.touristRoutePictures[1].url}
+                                        alt=""
+                                      />
+                                    }
+                                  >
+                                    <Card.Meta
+                                      title={t.title}
+                                      description={`${t.description.slice(
+                                        0,
+                                        50
+                                      )}...`}
                                     />
-                                  }
-                                >
-                                  <Card.Meta
-                                    title={t.title}
-                                    description={`${t.description.slice(
-                                      0,
-                                      50
-                                    )}...`}
-                                  />
-                                </Card>
-                              </Col>
-                            )
-                          })}
-                        </Row>
-                      </Card>
-                    </Col>
-                  )
-                })}
-              </Row>
-            )}
-          </Col>
-          <Col span={12}>
-            <Card>
-              <Typography.Title level={3}>预定酒店</Typography.Title>
-              <Input.Group compact>
-                <Input
-                  placeholder="城市、机场、区域、地标或酒店名称"
-                  style={{ width: '40%' }}
-                />
-                <DatePicker.RangePicker style={{ width: '60%' }} />
-              </Input.Group>
-            </Card>
-          </Col>
-        </Row>
-      </Content>
-      <GlobalFooter />
-    </Layout>
+                                  </Card>
+                                </Col>
+                              )
+                            })}
+                          </Row>
+                        </Card>
+                      </Col>
+                    )
+                  })}
+                </Row>
+              </DataSpin>
+            </Col>
+            <Col span={12}>
+              <DataSpin loading={loading}>
+                <Carousel></Carousel>
+              </DataSpin>
+            </Col>
+          </Row>
+        </Layout.Content>
+        <GlobalFooter />
+      </Layout>
+    </>
   )
 }
