@@ -15,7 +15,7 @@ const initialState: productCollectionsState = {
 
 // 获取推荐产品分类
 export const getProductCollections = createAsyncThunk(
-  'productCollections/getproductCollections',
+  'productCollections/getProductCollections',
   async () => {
     const { data } = await axios.get('/productCollections')
     return data
@@ -28,14 +28,17 @@ export const productCollectionsSlice = createSlice({
   reducers: {},
   extraReducers: {
     [getProductCollections.pending.type]: state => {
+      // 获取数据中: 开始加载/清空错误信息
       state.loading = true
       state.error = null
     },
     [getProductCollections.fulfilled.type]: (state, action) => {
+      // 获取成功: 返回请求数据/停止加载
       state.loading = false
       state.data = action.payload
     },
     [getProductCollections.rejected.type]: (state, action) => {
+      // 获取失败: 停止加载/清空数据/返回错误信息
       state.loading = false
       state.data = []
       state.error = action.error.message
