@@ -29,11 +29,11 @@ export const recommendProductsSlice = createSlice({
   extraReducers: {
     [getRecommendProducts.pending.type]: state => {
       state.loading = true
+      state.error = null
     },
     [getRecommendProducts.fulfilled.type]: (state, action) => {
       state.loading = false
       state.data = action.payload
-      state.error = null
     },
     [getRecommendProducts.rejected.type]: (state, action) => {
       state.loading = false
