@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { GlobalFooter, GlobalHeader, DataSpin } from '../../components'
+import { GlobalFooter, GlobalHeader, Suspense } from '../../components'
 import { Layout, Row, Col, Carousel, message, Card, Typography } from 'antd'
 import { getProductCollections } from '../../redux/productCollections/slice'
 import { useSelector, useDispatch } from '../../hooks'
@@ -34,63 +34,85 @@ export const Home: React.FC = () => {
           style={{
             padding: '0 50px',
             margin: '16px 0',
-            minHeight: 1024,
+            minHeight: 1080,
           }}
         >
           <Row gutter={[16, 16]}>
-            <Col span={12}>
-              <DataSpin loading={loading}>
-                <Row gutter={[0, 64]}>
-                  {productCollections.map(r => {
+            <Suspense loading={loading} style={{ width: '100%' }}>
+              {productCollections.map(p => {
+                return (
+                  <Col span={12} key={p.id}>
+                    <Card
+                      title={
+                        <Typography.Title level={3} style={{ margin: 0 }}>
+                          {p.title}
+                        </Typography.Title>
+                      }
+                    >
+                      <Row gutter={[16, 16]}>
+                        {p.touristRoutes.slice(0, 8).map((t, index) => {
+                          return (
+                            <Col span={12} key={index}>
+                              <Card
+                                type="inner"
+                                size="small"
+                                hoverable
+                                cover={
+                                  <img
+                                    draggable={false}
+                                    height={200}
+                                    src={t.touristRoutePictures[1].url}
+                                    alt=""
+                                  />
+                                }
+                              >
+                                <Card.Meta
+                                  title={t.title}
+                                  description={`${t.description.slice(
+                                    0,
+                                    50
+                                  )}...`}
+                                />
+                              </Card>
+                            </Col>
+                          )
+                        })}
+                      </Row>
+                    </Card>
+                  </Col>
+                )
+              })}
+              <Col span={12}>
+                <Row gutter={[0, 16]}>
+                  {productCollections.map(p => {
                     return (
-                      <Col span={24} key={r.id}>
-                        <Card
-                          title={
-                            <Typography.Title level={3} style={{ margin: 0 }}>
-                              {r.title}
-                            </Typography.Title>
-                          }
-                        >
-                          <Row gutter={[16, 16]}>
-                            {r.touristRoutes.slice(0, 8).map((t, index) => {
-                              return (
-                                <Col span={12} key={index}>
-                                  <Card
-                                    type="inner"
-                                    size="small"
-                                    cover={
-                                      <img
-                                        draggable={false}
-                                        height={200}
-                                        src={t.touristRoutePictures[1].url}
-                                        alt=""
-                                      />
-                                    }
-                                  >
-                                    <Card.Meta
-                                      title={t.title}
-                                      description={`${t.description.slice(
-                                        0,
-                                        50
-                                      )}...`}
-                                    />
-                                  </Card>
-                                </Col>
-                              )
-                            })}
-                          </Row>
-                        </Card>
+                      <Col key={p.id}>
+                        <Carousel effect="fade" autoplay dotPosition="top">
+                          {p.touristRoutes.map(t => {
+                            return (
+                              <Card
+                                key={t.id}
+                                cover={
+                                  <img
+                                    src={t.touristRoutePictures[2].url}
+                                    alt=""
+                                  />
+                                }
+                              >
+                                <Card.Meta
+                                  title={t.title}
+                                  description={t.description}
+                                />
+                              </Card>
+                            )
+                          })}
+                        </Carousel>
                       </Col>
                     )
                   })}
                 </Row>
-              </DataSpin>
-            </Col>
-            <Col span={12}>
-              <DataSpin loading={loading}>
-                <Carousel></Carousel>
-              </DataSpin>
-            </Col>
+              </Col>
+            </Suspense>
           </Row>
         </Layout.Content>
         <GlobalFooter />

@@ -8,7 +8,7 @@ interface PropsType extends PropsWithChildren {
   size?: SpinSize
 }
 
-export const DataSpin: React.FC<PropsType> = ({
+export const Suspense: React.FC<PropsType> = ({
   loading,
   style,
   size,
