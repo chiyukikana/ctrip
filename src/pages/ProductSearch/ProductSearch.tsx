@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from '../../hooks'
 import { BasicLayout } from '../../layouts'
 import { getSearchProducts } from '../../redux/productSearch/slice'
 import { ProductList } from './ProductList'
+import { Helmet } from 'react-helmet-async'
 
 export const ProductSearch: React.FC = () => {
   const { productKeywords } = useParams<{ productKeywords: string }>()
@@ -24,6 +25,9 @@ export const ProductSearch: React.FC = () => {
   return (
     <BasicLayout>
       {contextHolder}
+      <Helmet>
+        <title>{productKeywords ? `${productKeywords} - ` : ''}搜索结果</title>
+      </Helmet>
       <Spinner loading={loading}>
         <ProductList
           products={productList}

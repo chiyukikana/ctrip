@@ -9,6 +9,7 @@ import { Spinner } from '../../components'
 import { ProductActions } from './ProductActions'
 import { ProductAbout } from './ProductAbout'
 import { ProductIntro } from './ProductIntro'
+import { Helmet } from 'react-helmet-async'
 
 export const ProductDetail: React.FC = () => {
   const { productId } = useParams<{ productId: string }>()
@@ -35,6 +36,9 @@ export const ProductDetail: React.FC = () => {
           </Row>
         )}
       >
+        <Helmet>
+          <title>{product?.title}</title>
+        </Helmet>
         <Row gutter={[16, 16]}>
           <Col span={12}>
             <ProductAbout product={product} />

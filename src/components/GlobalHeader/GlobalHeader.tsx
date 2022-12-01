@@ -50,8 +50,8 @@ export const GlobalHeader: React.FC = () => {
         <Col span={12} style={{ textAlign: 'right' }}>
           <Space>
             <Button.Group>
-              <Button>注册</Button>
-              <Button>登录</Button>
+              <Button onClick={() => navigate('/register')}>注册</Button>
+              <Button onClick={() => navigate('/signin')}>登录</Button>
             </Button.Group>
             <Button
               icon={<GithubOutlined />}

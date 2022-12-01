@@ -5,6 +5,7 @@ import { getProductCollections } from '../../redux/productCollections/slice'
 import { useSelector, useDispatch } from '../../hooks'
 import { useNavigate } from 'react-router-dom'
 import { BasicLayout } from '../../layouts'
+import { Helmet } from 'react-helmet-async'
 
 export const Home: React.FC = () => {
   // 产品分类获取状态
@@ -27,6 +28,9 @@ export const Home: React.FC = () => {
   return (
     <BasicLayout>
       {contextHolder}
+      <Helmet>
+        <title>携程旅行网官网:酒店预订,机票预订查询,旅游度假,商旅管理</title>
+      </Helmet>
       <Row gutter={[16, 16]}>
         <Spinner
           loading={loading}

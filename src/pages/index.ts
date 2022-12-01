@@ -1,3 +1,5 @@
 export * from './Home'
 export * from './ProductDetail'
 export * from './ProductSearch'
+export * from './Register'
+export * from './SignIn'

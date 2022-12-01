@@ -1,5 +1,5 @@
 import { RouteObject } from 'react-router-dom'
-import { Home, ProductDetail, ProductSearch } from '../pages'
+import { Home, SignIn, ProductDetail, ProductSearch, Register } from '../pages'
 
 export const publicRoutes: RouteObject[] = [
   {
@@ -22,5 +22,13 @@ export const publicRoutes: RouteObject[] = [
         element: <ProductSearch />,
       },
     ],
+  },
+  {
+    path: '/register',
+    element: <Register />,
+  },
+  {
+    path: '/signin',
+    element: <SignIn />,
   },
 ]
