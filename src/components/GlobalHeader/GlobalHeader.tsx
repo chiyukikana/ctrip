@@ -1,7 +1,7 @@
 import { GithubOutlined } from '@ant-design/icons'
 import { Layout, Button, Row, Col, Input, Space } from 'antd'
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const { Header } = Layout
 const { Search } = Input
@@ -20,15 +20,17 @@ export const GlobalHeader: React.FC = () => {
         <Col span={12}>
           <Row>
             <Col span={12}>
-              <img
-                draggable={false}
-                style={{
-                  width: 194,
-                  height: 32,
-                }}
-                src="https://webresource.c-ctrip.com/ares2/nfes/pc-home/1.0.65/default/image/logo.png"
-                alt=""
-              />
+              <Link to="/">
+                <img
+                  draggable={false}
+                  style={{
+                    width: 194,
+                    height: 32,
+                  }}
+                  src="https://webresource.c-ctrip.com/ares2/nfes/pc-home/1.0.65/default/image/logo.png"
+                  alt=""
+                />
+              </Link>
             </Col>
             <Col
               span={12}
