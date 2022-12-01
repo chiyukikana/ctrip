@@ -1,11 +1,13 @@
 import { GithubOutlined } from '@ant-design/icons'
 import { Layout, Button, Row, Col, Input, Space } from 'antd'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const { Header } = Layout
 const { Search } = Input
 
 export const GlobalHeader: React.FC = () => {
+  const navigate = useNavigate()
   return (
     <Header
       style={{
@@ -37,10 +39,7 @@ export const GlobalHeader: React.FC = () => {
             >
               <Search
                 placeholder="搜索旅游目的地/主题/关键字..."
-                onSearch={keywords => {
-                  // 搜索相关逻辑
-                  console.log(keywords)
-                }}
+                onSearch={keywords => navigate(`/search/${keywords}`)}
                 enterButton
               />
             </Col>
