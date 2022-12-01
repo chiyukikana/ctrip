@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { message } from 'antd'
 import { useParams } from 'react-router-dom'
-import { Suspense } from '../../components'
+import { Spinner } from '../../components'
 import { useDispatch, useSelector } from '../../hooks'
 import { BasicLayout } from '../../layouts'
 import { getSearchProducts } from '../../redux/productSearch/slice'
@@ -24,7 +24,7 @@ export const ProductSearch: React.FC = () => {
   return (
     <BasicLayout>
       {contextHolder}
-      <Suspense loading={loading}>
+      <Spinner loading={loading}>
         <ProductList
           products={productList}
           paging={pagination}
@@ -38,7 +38,7 @@ export const ProductSearch: React.FC = () => {
             )
           }}
         />
-      </Suspense>
+      </Spinner>
     </BasicLayout>
   )
 }

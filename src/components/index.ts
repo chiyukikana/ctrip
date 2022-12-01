@@ -1,3 +1,3 @@
-export * from './Suspense'
+export * from './Spinner'
 export * from './GlobalHeader'
 export * from './GlobalFooter'

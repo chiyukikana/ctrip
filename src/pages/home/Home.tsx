@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Suspense } from '../../components'
+import { Spinner } from '../../components'
 import { Layout, Row, Col, Carousel, message, Card, Typography } from 'antd'
 import { getProductCollections } from '../../redux/productCollections/slice'
 import { useSelector, useDispatch } from '../../hooks'
@@ -28,7 +28,7 @@ export const Home: React.FC = () => {
     <BasicLayout>
       {contextHolder}
       <Row gutter={[16, 16]}>
-        <Suspense loading={loading} style={{ width: '100%', paddingTop: 16 }}>
+        <Spinner loading={loading} style={{ width: '100%', paddingTop: 16 }}>
           {productCollections.map(p => {
             return (
               <Col span={12} key={p.id}>
@@ -97,7 +97,7 @@ export const Home: React.FC = () => {
               })}
             </Row>
           </Col>
-        </Suspense>
+        </Spinner>
       </Row>
     </BasicLayout>
   )

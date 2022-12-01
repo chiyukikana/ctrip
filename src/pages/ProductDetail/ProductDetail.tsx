@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from '../../hooks'
 import { useParams } from 'react-router-dom'
 import { getProductDetail } from '../../redux/productDetail/slice'
 import { BasicLayout } from '../../layouts'
-import { Suspense } from '../../components'
+import { Spinner } from '../../components'
 
 import { ProductActions } from './ProductActions'
 import { ProductAbout } from './ProductAbout'
@@ -26,7 +26,7 @@ export const ProductDetail: React.FC = () => {
   return (
     <BasicLayout>
       {contextHolder}
-      <Suspense loading={loading}>
+      <Spinner loading={loading}>
         <Row gutter={[16, 16]}>
           <Col span={12}>
             <ProductAbout product={product} />
@@ -38,7 +38,7 @@ export const ProductDetail: React.FC = () => {
             <ProductIntro product={product} />
           </Col>
         </Row>
-      </Suspense>
+      </Spinner>
     </BasicLayout>
   )
 }
