@@ -9,11 +9,11 @@ import 'dayjs/locale/zh-cn'
 
 export const AppProvider: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <ReactReduxProvider store={store}>
-      <AntdConfigProvider locale={locale}>
+    <AntdConfigProvider locale={locale}>
+      <ReactReduxProvider store={store}>
         <RouterProvider router={router} fallbackElement={<h2>Loading...</h2>} />
         {children}
-      </AntdConfigProvider>
-    </ReactReduxProvider>
+      </ReactReduxProvider>
+    </AntdConfigProvider>
   )
 }
