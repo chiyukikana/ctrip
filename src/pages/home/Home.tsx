@@ -28,7 +28,15 @@ export const Home: React.FC = () => {
     <BasicLayout>
       {contextHolder}
       <Row gutter={[16, 16]}>
-        <Spinner loading={loading} style={{ width: '100%', paddingTop: 16 }}>
+        <Spinner
+          loading={loading}
+          extraRender={spin => (
+            <>
+              <Col span={12}>{spin}</Col>
+              <Col span={12}>{spin}</Col>
+            </>
+          )}
+        >
           {productCollections.map(p => {
             return (
               <Col span={12} key={p.id}>

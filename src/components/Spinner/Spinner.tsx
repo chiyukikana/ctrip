@@ -4,17 +4,19 @@ import { SpinSize } from 'antd/es/spin'
 
 interface PropsType extends PropsWithChildren {
   loading: boolean
+  extraRender?: (spin: React.ReactElement) => React.ReactNode
   style?: React.CSSProperties
   size?: SpinSize
 }
 
 export const Spinner: React.FC<PropsType> = ({
   loading,
+  extraRender,
   style,
   size,
   children,
 }) => {
-  return loading ? (
+  const StyledSpin: React.FC = () => (
     <div
       style={{
         display: 'flex',
@@ -25,7 +27,9 @@ export const Spinner: React.FC<PropsType> = ({
     >
       <Spin size={size} />
     </div>
-  ) : (
-    <>{children}</>
   )
+  const SpinWrapper: React.FC = () => (
+    <>{extraRender ? extraRender(<StyledSpin />) : <StyledSpin />}</>
+  )
+  return <>{loading ? <SpinWrapper /> : children}</>
 }

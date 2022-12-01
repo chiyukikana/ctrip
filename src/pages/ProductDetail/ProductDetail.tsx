@@ -26,7 +26,15 @@ export const ProductDetail: React.FC = () => {
   return (
     <BasicLayout>
       {contextHolder}
-      <Spinner loading={loading}>
+      <Spinner
+        loading={loading}
+        extraRender={spin => (
+          <Row gutter={[16, 0]}>
+            <Col span={12}>{spin}</Col>
+            <Col span={12}>{spin}</Col>
+          </Row>
+        )}
+      >
         <Row gutter={[16, 16]}>
           <Col span={12}>
             <ProductAbout product={product} />
