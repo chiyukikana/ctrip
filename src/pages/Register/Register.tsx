@@ -1,14 +1,17 @@
 import { Button, Form, Input, Space, Typography } from 'antd'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useNavigate } from 'react-router-dom'
-import { useMessage } from '../../hooks'
+import { useDispatch, useMessage, useSelector } from '../../hooks'
 import { UserLayout } from '../../layouts'
 import axios from '../../lib/axios'
+import { signIn } from '../../redux/account/slice'
 
 export const Register: React.FC = () => {
   const messageApi = useMessage()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const jwt = useSelector(s => s.account.token)
   const onFinish = async ({ email, password, confirmPassword }) => {
     try {
       await axios.post('/auth/register', {
@@ -16,12 +19,20 @@ export const Register: React.FC = () => {
         password,
         confirmPassword,
       })
-      messageApi.success('账户注册成功！')
-      navigate('/signin')
+      messageApi.success('账户注册成功')
+      // 注册成功后自动登录
+      dispatch(signIn({ email, password }))
     } catch (error) {
-      messageApi.error('账户注册失败，邮箱或已被使用！')
+      messageApi.error('账户注册失败')
     }
   }
+  // 副作用钩子，注册成功后判断是否登录成功，如果成功则返回首页
+  useEffect(() => {
+    if (jwt) {
+      messageApi.success('登录成功')
+      navigate('/')
+    }
+  }, [jwt])
   return (
     <UserLayout>
       <Helmet>

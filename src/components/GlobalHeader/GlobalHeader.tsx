@@ -63,7 +63,7 @@ export const GlobalHeader: React.FC = () => {
                 <Button
                   onClick={() => {
                     dispatch(accountSlice.actions.signOut())
-                    messageApi.warning('您已注销！')
+                    messageApi.warning('您已注销')
                   }}
                 >
                   注销

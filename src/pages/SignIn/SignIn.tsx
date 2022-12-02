@@ -19,13 +19,13 @@ export const SignIn: React.FC = () => {
   // 登录成功
   useEffect(() => {
     if (jwt) {
-      messageApi.success('登录成功！')
+      messageApi.success('登录成功')
       navigate('/')
     }
   }, [jwt])
   // 登录失败
   useEffect(() => {
-    error && messageApi.error('登录失败，邮箱或密码错误！')
+    error && messageApi.error('邮箱或密码错误')
   }, [error])
   return (
     <UserLayout>

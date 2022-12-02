@@ -23,7 +23,7 @@ export const ProductActions: React.FC = () => {
               onClick={() => {
                 if (jwt) {
                 } else {
-                  messageApi.warning('请先登录！')
+                  messageApi.warning('请先登录')
                   navigate('/signin')
                 }
               }}
