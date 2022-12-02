@@ -19,8 +19,8 @@ export const SignIn: React.FC = () => {
   // 登录成功
   useEffect(() => {
     if (jwt) {
-      messageApi.success('登录成功，正在返回首页！')
-      jwt && navigate('/')
+      messageApi.success('登录成功！')
+      navigate('/')
     }
   }, [jwt])
   // 登录失败
@@ -42,6 +42,7 @@ export const SignIn: React.FC = () => {
         <Form name="signIn" autoComplete="off" onFinish={onFinish}>
           <Form.Item
             name="email"
+            hasFeedback
             rules={[
               {
                 required: true,
@@ -64,6 +65,7 @@ export const SignIn: React.FC = () => {
           </Form.Item>
           <Form.Item
             name="password"
+            hasFeedback
             rules={[
               {
                 required: true,

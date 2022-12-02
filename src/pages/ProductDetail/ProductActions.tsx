@@ -2,10 +2,11 @@ import { ShoppingCartOutlined } from '@ant-design/icons'
 import { Button, Card, Col, DatePicker, Row, Space } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from '../../hooks'
+import { useMessage, useSelector } from '../../hooks'
 
 export const ProductActions: React.FC = () => {
   const navigate = useNavigate()
+  const messageApi = useMessage()
   const jwt = useSelector(s => s.account.token)
   return (
     <Card>
@@ -20,7 +21,9 @@ export const ProductActions: React.FC = () => {
               danger
               icon={<ShoppingCartOutlined />}
               onClick={() => {
-                if (!jwt) {
+                if (jwt) {
+                } else {
+                  messageApi.warning('请先登录！')
                   navigate('/signin')
                 }
               }}

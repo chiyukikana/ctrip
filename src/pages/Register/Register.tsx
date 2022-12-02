@@ -1,9 +1,27 @@
-import { Button, Col, Form, Input, Row, Space, Typography } from 'antd'
+import { Button, Form, Input, Space, Typography } from 'antd'
 import React from 'react'
 import { Helmet } from 'react-helmet-async'
+import { useNavigate } from 'react-router-dom'
+import { useMessage } from '../../hooks'
 import { UserLayout } from '../../layouts'
+import axios from '../../lib/axios'
 
 export const Register: React.FC = () => {
+  const messageApi = useMessage()
+  const navigate = useNavigate()
+  const onFinish = async ({ email, password, confirmPassword }) => {
+    try {
+      await axios.post('/auth/register', {
+        email,
+        password,
+        confirmPassword,
+      })
+      messageApi.success('账户注册成功！')
+      navigate('/signin')
+    } catch (error) {
+      messageApi.error('账户注册失败，邮箱或已被使用！')
+    }
+  }
   return (
     <UserLayout>
       <Helmet>
@@ -16,15 +34,10 @@ export const Register: React.FC = () => {
           marginTop: 64,
         }}
       >
-        <Form
-          name="signUp"
-          autoComplete="off"
-          onFinish={obj => {
-            console.log(obj)
-          }}
-        >
+        <Form name="signUp" autoComplete="off" onFinish={onFinish}>
           <Form.Item
             name="email"
+            hasFeedback
             rules={[
               {
                 required: true,
@@ -47,6 +60,7 @@ export const Register: React.FC = () => {
           </Form.Item>
           <Form.Item
             name="password"
+            hasFeedback
             rules={[
               {
                 required: true,
@@ -65,6 +79,7 @@ export const Register: React.FC = () => {
           </Form.Item>
           <Form.Item
             name="confirmPassword"
+            hasFeedback
             rules={[
               {
                 required: true,

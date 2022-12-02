@@ -4,6 +4,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useMessage, useSelector } from '../../hooks'
 import { accountSlice } from '../../redux/account/slice'
+import jwtDecode, { JwtPayload } from 'jwt-decode'
 
 const { Header } = Layout
 const { Search } = Input
@@ -57,7 +58,7 @@ export const GlobalHeader: React.FC = () => {
             {jwt ? (
               <>
                 <Button icon={<UserOutlined />}>
-                  chiyukikana23333@gmail.com
+                  {jwtDecode<JwtPayload & { username: string }>(jwt).username}
                 </Button>
                 <Button
                   onClick={() => {
