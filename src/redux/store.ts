@@ -9,7 +9,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist'
-import { createBlacklistFilter } from 'redux-persist-transform-filter'
+import { createWhitelistFilter } from 'redux-persist-transform-filter'
 import storage from 'redux-persist/lib/storage'
 import { productCollectionsSlice } from './productCollections/slice'
 import { productDetailSlice } from './productDetail/slice'
@@ -27,17 +27,13 @@ const reducer = combineReducers({
   // 账户
   account: accountSlice.reducer,
 })
-// 过滤掉account的loading与error对象
-const accountBlacklistFilter = createBlacklistFilter('account', [
-  'loading',
-  'error',
-])
+const accountWhitelistFilter = createWhitelistFilter('account', ['token'])
 const persistedReducer = persistReducer(
   {
     key: 'ctrip',
     storage,
     whitelist: ['account'],
-    transforms: [accountBlacklistFilter],
+    transforms: [accountWhitelistFilter],
   },
   reducer
 )
