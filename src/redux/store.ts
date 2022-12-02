@@ -3,6 +3,7 @@ import { productCollectionsSlice } from './productCollections/slice'
 import { productDetailSlice } from './productDetail/slice'
 import { actionLog } from './middlewares/actionLog'
 import { productSearchSlice } from './productSearch/slice'
+import { accountSlice } from './account/slice'
 
 const reducer = combineReducers({
   // 产品分类
@@ -11,6 +12,8 @@ const reducer = combineReducers({
   productDetail: productDetailSlice.reducer,
   // 产品搜索
   productSearch: productSearchSlice.reducer,
+  // 账户
+  account: accountSlice.reducer,
 })
 const store = configureStore({
   reducer,

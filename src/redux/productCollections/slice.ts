@@ -17,7 +17,7 @@ const initialState: productCollectionsState = {
 export const getProductCollections = createAsyncThunk(
   'productCollections/getProductCollections',
   async () => {
-    const { data } = await axios.get('/productCollections')
+    const { data } = await axios.get('/api/productCollections')
     return data
   }
 )

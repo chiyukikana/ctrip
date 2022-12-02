@@ -23,7 +23,7 @@ export const getSearchProducts = createAsyncThunk(
     pageSize: string | number
   }) => {
     const { productKeywords, nextPage, pageSize } = params
-    let url = `/touristRoutes?pageNumber=${nextPage}&pageSize=${pageSize}`
+    let url = `/api/touristRoutes?pageNumber=${nextPage}&pageSize=${pageSize}`
     if (productKeywords) {
       url += `&keywords=${productKeywords}`
     }

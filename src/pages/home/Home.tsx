@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Spinner } from '../../components'
-import { Layout, Row, Col, Carousel, message, Card, Typography } from 'antd'
+import { Row, Col, Carousel, message, Card, Typography } from 'antd'
 import { getProductCollections } from '../../redux/productCollections/slice'
 import { useSelector, useDispatch } from '../../hooks'
 import { useNavigate } from 'react-router-dom'
