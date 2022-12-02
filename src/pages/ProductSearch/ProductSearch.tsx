@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { message } from 'antd'
 import { useParams } from 'react-router-dom'
 import { Spinner } from '../../components'
-import { useDispatch, useSelector } from '../../hooks'
+import { useDispatch, useMessage, useSelector } from '../../hooks'
 import { BasicLayout } from '../../layouts'
 import { getSearchProducts } from '../../redux/productSearch/slice'
 import { ProductList } from './ProductList'
@@ -15,7 +15,7 @@ export const ProductSearch: React.FC = () => {
   const pagination = useSelector(s => s.productSearch.pagination)
   const error = useSelector(s => s.productSearch.error)
   const dispatch = useDispatch()
-  const [messageApi, contextHolder] = message.useMessage()
+  const messageApi = useMessage()
   useEffect(() => {
     dispatch(getSearchProducts({ productKeywords, nextPage: 1, pageSize: 10 }))
   }, [productKeywords])
@@ -24,7 +24,6 @@ export const ProductSearch: React.FC = () => {
   }, [error])
   return (
     <BasicLayout>
-      {contextHolder}
       <Helmet>
         <title>{productKeywords ? `${productKeywords} - ` : ''}搜索结果</title>
       </Helmet>

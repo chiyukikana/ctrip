@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
-import { Anchor, Col, message, Row, Card, Menu, Affix } from 'antd'
-import { useDispatch, useSelector } from '../../hooks'
+import { Col, Row } from 'antd'
+import { useDispatch, useMessage, useSelector } from '../../hooks'
 import { useParams } from 'react-router-dom'
 import { getProductDetail } from '../../redux/productDetail/slice'
 import { BasicLayout } from '../../layouts'
 import { Spinner } from '../../components'
-
 import { ProductActions } from './ProductActions'
 import { ProductAbout } from './ProductAbout'
 import { ProductIntro } from './ProductIntro'
@@ -16,7 +15,7 @@ export const ProductDetail: React.FC = () => {
   const loading = useSelector(s => s.productDetail.loading)
   const product = useSelector(s => s.productDetail.data)
   const error = useSelector(s => s.productDetail.error)
-  const [messageApi, contextHolder] = message.useMessage()
+  const messageApi = useMessage()
   const dispatch = useDispatch()
   useEffect(() => {
     productId && dispatch(getProductDetail(productId))
@@ -26,7 +25,6 @@ export const ProductDetail: React.FC = () => {
   }, [error])
   return (
     <BasicLayout>
-      {contextHolder}
       <Spinner
         loading={loading}
         extraRender={spin => (

@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { Spinner } from '../../components'
-import { Row, Col, Carousel, message, Card, Typography } from 'antd'
+import { Row, Col, Carousel, Card, Typography } from 'antd'
 import { getProductCollections } from '../../redux/productCollections/slice'
 import { useSelector, useDispatch } from '../../hooks'
 import { useNavigate } from 'react-router-dom'
 import { BasicLayout } from '../../layouts'
 import { Helmet } from 'react-helmet-async'
+import { useMessage } from '../../hooks'
 
 export const Home: React.FC = () => {
   // 产品分类获取状态
@@ -16,7 +17,7 @@ export const Home: React.FC = () => {
   const error = useSelector(s => s.productCollections.error)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [messageApi, contextHolder] = message.useMessage()
+  const messageApi = useMessage()
   // 尝试获取产品分类
   useEffect(() => {
     dispatch(getProductCollections())
@@ -27,7 +28,6 @@ export const Home: React.FC = () => {
   }, [error])
   return (
     <BasicLayout>
-      {contextHolder}
       <Helmet>
         <title>携程旅行网官网:酒店预订,机票预订查询,旅游度假,商旅管理</title>
       </Helmet>

@@ -2,7 +2,7 @@ import { Button, Form, Input, Space, Typography, message } from 'antd'
 import React, { useEffect } from 'react'
 import { signIn } from '../../redux/account/slice'
 import { Helmet } from 'react-helmet-async'
-import { useDispatch, useSelector } from '../../hooks'
+import { useDispatch, useMessage, useSelector } from '../../hooks'
 import { UserLayout } from '../../layouts'
 import { useNavigate } from 'react-router-dom'
 
@@ -12,19 +12,23 @@ export const SignIn: React.FC = () => {
   const error = useSelector(s => s.account.error)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [messageApi, contextHolder] = message.useMessage()
+  const messageApi = useMessage()
   const onFinish = ({ email, password }) => {
     dispatch(signIn({ email, password }))
   }
+  // 登录成功
   useEffect(() => {
-    jwt && navigate('/')
+    if (jwt) {
+      messageApi.success('登录成功，正在返回首页！')
+      jwt && navigate('/')
+    }
   }, [jwt])
+  // 登录失败
   useEffect(() => {
     error && messageApi.error('登录失败，邮箱或密码错误！')
   }, [error])
   return (
     <UserLayout>
-      {contextHolder}
       <Helmet>
         <title>用户登录</title>
       </Helmet>
