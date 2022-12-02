@@ -1,4 +1,16 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist'
+import { createBlacklistFilter } from 'redux-persist-transform-filter'
+import storage from 'redux-persist/lib/storage'
 import { productCollectionsSlice } from './productCollections/slice'
 import { productDetailSlice } from './productDetail/slice'
 import { actionLog } from './middlewares/actionLog'
@@ -15,13 +27,33 @@ const reducer = combineReducers({
   // 账户
   account: accountSlice.reducer,
 })
+// 过滤掉account的loading与error对象
+const accountBlacklistFilter = createBlacklistFilter('account', [
+  'loading',
+  'error',
+])
+const persistedReducer = persistReducer(
+  {
+    key: 'ctrip',
+    storage,
+    whitelist: ['account'],
+    transforms: [accountBlacklistFilter],
+  },
+  reducer
+)
 const store = configureStore({
-  reducer,
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(actionLog),
+  reducer: persistedReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(actionLog),
 })
+const persistor = persistStore(store)
 
 export type RootState = ReturnType<typeof store.getState>
 
 export type AppDispatch = typeof store.dispatch
 
-export default store
+export default { store, persistor }

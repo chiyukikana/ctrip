@@ -1,5 +1,9 @@
-import { GithubOutlined, UserOutlined } from '@ant-design/icons'
-import { Layout, Button, Row, Col, Input, Space } from 'antd'
+import {
+  GithubOutlined,
+  ShoppingCartOutlined,
+  UserOutlined,
+} from '@ant-design/icons'
+import { Layout, Button, Row, Col, Input, Space, Badge } from 'antd'
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useMessage, useSelector } from '../../hooks'
@@ -60,6 +64,11 @@ export const GlobalHeader: React.FC = () => {
                 <Button icon={<UserOutlined />}>
                   {jwtDecode<JwtPayload & { username: string }>(jwt).username}
                 </Button>
+                <div style={{ marginRight: 16 }}>
+                  <Badge count={999}>
+                    <Button icon={<ShoppingCartOutlined />}>购物车</Button>
+                  </Badge>
+                </div>
                 <Button
                   onClick={() => {
                     dispatch(accountSlice.actions.signOut())
