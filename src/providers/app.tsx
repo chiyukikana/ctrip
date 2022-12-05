@@ -24,7 +24,6 @@ export const AppProvider: React.FC<PropsWithChildren> = ({ children }) => {
                 router={router}
                 fallbackElement={<h2>Loading...</h2>}
               />
-
               {children}
             </PersistGateProvider>
           </ReactReduxProvider>
