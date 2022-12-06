@@ -6,7 +6,7 @@ import {
 import { Layout, Button, Row, Col, Input, Space, Badge } from 'antd'
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useMessage, useSelector } from '../../hooks'
+import { useDispatch, useMessageApi, useSelector } from '../../hooks'
 import { accountSlice } from '../../redux/account/slice'
 import jwtDecode, { JwtPayload } from 'jwt-decode'
 
@@ -17,7 +17,7 @@ export const GlobalHeader: React.FC = () => {
   const navigate = useNavigate()
   const jwt = useSelector(s => s.account.token)
   const dispatch = useDispatch()
-  const messageApi = useMessage()
+  const messageApi = useMessageApi()
   return (
     <Header
       style={{

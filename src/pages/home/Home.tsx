@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from '../../hooks'
 import { useNavigate } from 'react-router-dom'
 import { BasicLayout } from '../../layouts'
 import { Helmet } from 'react-helmet-async'
-import { useMessage } from '../../hooks'
+import { useMessageApi } from '../../hooks'
 
 export const Home: React.FC = () => {
   // 产品分类获取状态
@@ -17,7 +17,7 @@ export const Home: React.FC = () => {
   const error = useSelector(s => s.productCollections.error)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const messageApi = useMessage()
+  const messageApi = useMessageApi()
   // 尝试获取产品分类
   useEffect(() => {
     dispatch(getProductCollections())

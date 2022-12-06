@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Col, Row } from 'antd'
-import { useDispatch, useMessage, useSelector } from '../../hooks'
+import { useDispatch, useMessageApi, useSelector } from '../../hooks'
 import { useParams } from 'react-router-dom'
 import { getProductDetail } from '../../redux/productDetail/slice'
 import { BasicLayout } from '../../layouts'
@@ -15,7 +15,7 @@ export const ProductDetail: React.FC = () => {
   const loading = useSelector(s => s.productDetail.loading)
   const product = useSelector(s => s.productDetail.data)
   const error = useSelector(s => s.productDetail.error)
-  const messageApi = useMessage()
+  const messageApi = useMessageApi()
   const dispatch = useDispatch()
   useEffect(() => {
     productId && dispatch(getProductDetail(productId))

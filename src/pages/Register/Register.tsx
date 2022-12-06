@@ -2,13 +2,13 @@ import { Button, Form, Input, Space, Typography } from 'antd'
 import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useMessage, useSelector } from '../../hooks'
+import { useDispatch, useMessageApi, useSelector } from '../../hooks'
 import { UserLayout } from '../../layouts'
 import axios from '../../lib/axios'
 import { signIn } from '../../redux/account/slice'
 
 export const Register: React.FC = () => {
-  const messageApi = useMessage()
+  const messageApi = useMessageApi()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const jwt = useSelector(s => s.account.token)

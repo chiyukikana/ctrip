@@ -2,7 +2,7 @@ import { Button, Form, Input, Space, Typography } from 'antd'
 import React, { useEffect } from 'react'
 import { signIn } from '../../redux/account/slice'
 import { Helmet } from 'react-helmet-async'
-import { useDispatch, useMessage, useSelector } from '../../hooks'
+import { useDispatch, useMessageApi, useSelector } from '../../hooks'
 import { UserLayout } from '../../layouts'
 import { useNavigate } from 'react-router-dom'
 
@@ -12,7 +12,7 @@ export const SignIn: React.FC = () => {
   const error = useSelector(s => s.account.error)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const messageApi = useMessage()
+  const messageApi = useMessageApi()
   const onFinish = ({ email, password }) => {
     dispatch(signIn({ email, password }))
   }
