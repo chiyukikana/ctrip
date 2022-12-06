@@ -28,6 +28,17 @@ module.exports = defineConfig({
   rules: {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-var-requires': 'off',
+    'no-restricted-imports': [
+      'error',
+      {
+        patterns: [
+          '**/components/*',
+          '**/hooks/*',
+          '**/layouts/*',
+          '**/pages/*',
+        ],
+      },
+    ],
     'react/react-in-jsx-scope': 'off',
     'prettier/prettier': 'error',
   },

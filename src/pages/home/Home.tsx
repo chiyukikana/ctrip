@@ -2,11 +2,10 @@ import React, { useEffect } from 'react'
 import { Spinner } from '../../components'
 import { Row, Col, Carousel, Card, Typography } from 'antd'
 import { getProductCollections } from '../../redux/productCollections/slice'
-import { useSelector, useDispatch } from '../../hooks'
+import { useSelector, useDispatch, useMessageApi } from '../../hooks'
 import { useNavigate } from 'react-router-dom'
 import { BasicLayout } from '../../layouts'
 import { Helmet } from 'react-helmet-async'
-import { useMessageApi } from '../../hooks'
 
 export const Home: React.FC = () => {
   // 产品分类获取状态
