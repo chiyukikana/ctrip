@@ -24,7 +24,7 @@ module.exports = defineConfig({
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint', 'prettier'],
+  plugins: ['react', '@typescript-eslint'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-var-requires': 'off',
@@ -40,6 +40,5 @@ module.exports = defineConfig({
       },
     ],
     'react/react-in-jsx-scope': 'off',
-    'prettier/prettier': 'error',
   },
 })
