@@ -22,6 +22,7 @@ export const ProductActions: React.FC = () => {
               icon={<ShoppingCartOutlined />}
               onClick={() => {
                 if (jwt) {
+                  // 加入购物车
                 } else {
                   messageApi.warning('请先登录')
                   navigate('/signin')

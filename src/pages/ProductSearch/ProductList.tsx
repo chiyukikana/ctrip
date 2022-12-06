@@ -117,15 +117,15 @@ export const ProductList: React.FC<PropsType> = ({
                   <List.Item
                     style={{ padding: 0 }}
                     actions={[
-                      <Space size={4}>
+                      <Space size={4} key={1}>
                         <StarOutlined />
                         {Math.floor(11 + Math.random() * 1000)}
                       </Space>,
-                      <Space size={4}>
+                      <Space size={4} key={2}>
                         <LikeOutlined />
                         {Math.floor(11 + Math.random() * 1000)}
                       </Space>,
-                      <Space size={4}>
+                      <Space size={4} key={3}>
                         <DislikeOutlined />
                         {Math.floor(11 + Math.random() * 1000)}
                       </Space>,

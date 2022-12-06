@@ -30,7 +30,7 @@ export const getSearchProducts = createAsyncThunk(
     const resp = await axios.get(url)
     return {
       data: resp.data,
-      pagination: JSON.parse(resp.headers['x-pagination']!),
+      pagination: JSON.parse(resp.headers['x-pagination'] ?? ''),
     }
   }
 )

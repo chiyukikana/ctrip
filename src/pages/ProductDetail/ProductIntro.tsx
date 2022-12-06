@@ -1,4 +1,4 @@
-import { Card, Divider, Row, Typography, Col } from 'antd'
+import { Card, Row, Typography, Col } from 'antd'
 import React from 'react'
 
 interface PropsType {

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { message } from 'antd'
 import { useParams } from 'react-router-dom'
 import { Spinner } from '../../components'
 import { useDispatch, useMessageApi, useSelector } from '../../hooks'
