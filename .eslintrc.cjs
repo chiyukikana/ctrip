@@ -39,6 +39,7 @@ module.exports = defineConfig({
         ],
       },
     ],
+    // vite自动导入React
     'react/react-in-jsx-scope': 'off',
   },
 })

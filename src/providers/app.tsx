@@ -16,14 +16,8 @@ export const AppProvider: React.FC<PropsWithChildren> = ({ children }) => {
       <AntdConfigProvider locale={locale}>
         <MessageProvider>
           <ReactReduxProvider store={store.store}>
-            <PersistGateProvider
-              loading={<h2>Loading...</h2>}
-              persistor={store.persistor}
-            >
-              <RouterProvider
-                router={router}
-                fallbackElement={<h2>Loading...</h2>}
-              />
+            <PersistGateProvider persistor={store.persistor}>
+              <RouterProvider router={router} />
               {children}
             </PersistGateProvider>
           </ReactReduxProvider>
