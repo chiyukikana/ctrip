@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Spinner } from '../../components'
-import { useDispatch, useMessageApi, useSelector } from '../../hooks'
+import { useDispatch, useSelector } from '../../hooks'
 import { BasicLayout } from '../../layouts'
 import { getSearchProducts } from '../../redux/productSearch/slice'
 import { ProductList } from './ProductList'
 import { Helmet } from 'react-helmet-async'
+import { App } from 'antd'
 
 export const ProductSearch: React.FC = () => {
   const { productKeywords } = useParams<{ productKeywords: string }>()
@@ -14,12 +15,12 @@ export const ProductSearch: React.FC = () => {
   const pagination = useSelector(s => s.productSearch.pagination)
   const error = useSelector(s => s.productSearch.error)
   const dispatch = useDispatch()
-  const messageApi = useMessageApi()
+  const { message } = App.useApp()
   useEffect(() => {
     dispatch(getSearchProducts({ productKeywords, nextPage: 1, pageSize: 10 }))
   }, [productKeywords])
   useEffect(() => {
-    error && messageApi.error(error)
+    error && message.error(error)
   }, [error])
   return (
     <BasicLayout>

@@ -3,10 +3,10 @@ import {
   ShoppingCartOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import { Layout, Button, Row, Col, Input, Space, Badge } from 'antd'
+import { Layout, Button, Row, Col, Input, Space, Badge, App } from 'antd'
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useMessageApi, useSelector } from '../../hooks'
+import { useDispatch, useSelector } from '../../hooks'
 import { accountSlice } from '../../redux/account/slice'
 import jwtDecode, { JwtPayload } from 'jwt-decode'
 
@@ -17,7 +17,7 @@ export const GlobalHeader: React.FC = () => {
   const navigate = useNavigate()
   const jwt = useSelector(s => s.account.token)
   const dispatch = useDispatch()
-  const messageApi = useMessageApi()
+  const { message } = App.useApp()
   return (
     <Header
       style={{
@@ -72,7 +72,7 @@ export const GlobalHeader: React.FC = () => {
                 <Button
                   onClick={() => {
                     dispatch(accountSlice.actions.signOut())
-                    messageApi.warning('您已注销')
+                    message.warning('您已注销')
                   }}
                 >
                   注销

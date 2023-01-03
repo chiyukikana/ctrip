@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { Spinner } from '../../components'
-import { Row, Col, Carousel, Card, Typography } from 'antd'
+import { Row, Col, Carousel, Card, Typography, App } from 'antd'
 import { getProductCollections } from '../../redux/productCollections/slice'
-import { useSelector, useDispatch, useMessageApi } from '../../hooks'
+import { useSelector, useDispatch } from '../../hooks'
 import { useNavigate } from 'react-router-dom'
 import { BasicLayout } from '../../layouts'
 import { Helmet } from 'react-helmet-async'
@@ -16,14 +16,14 @@ export const Home: React.FC = () => {
   const error = useSelector(s => s.productCollections.error)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const messageApi = useMessageApi()
+  const { message } = App.useApp()
   // 尝试获取产品分类
   useEffect(() => {
     dispatch(getProductCollections())
   }, [])
   // 产品分类获取失败
   useEffect(() => {
-    error && messageApi.error(error)
+    error && message.error(error)
   }, [error])
   return (
     <BasicLayout>
